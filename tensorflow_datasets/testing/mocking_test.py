@@ -72,6 +72,10 @@ class MockingTest(test_case.TestCase):
       ds = registered.load('mnist', split='train')
       for ex in ds.take(50):
         self.assertLessEqual(tf.math.reduce_max(ex['label']).numpy(), 10)
+      self.assertEqual(
+          [ex['label'].numpy() for ex in ds.take(5)],
+          [2, 0, 7, 9, 2],
+      )
 
 
 if __name__ == '__main__':
